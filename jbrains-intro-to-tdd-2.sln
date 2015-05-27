@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "point-of-sale", "point-of-sale\point-of-sale.csproj", "{69E4D118-73FD-4D4D-B3D8-54C057CE5784}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale", "PointOfSale\PointOfSale.csproj", "{69E4D118-73FD-4D4D-B3D8-54C057CE5784}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "point-of-sale.tests", "point-of-sale.tests\point-of-sale.tests.csproj", "{BD3D7DC9-4ABD-4265-86F8-CA09707D1B5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.Tests", "PointOfSale.Tests\PointOfSale.Tests.csproj", "{BD3D7DC9-4ABD-4265-86F8-CA09707D1B5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

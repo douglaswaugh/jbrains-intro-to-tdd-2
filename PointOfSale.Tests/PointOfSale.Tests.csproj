@@ -7,8 +7,8 @@
     <ProjectGuid>{BD3D7DC9-4ABD-4265-86F8-CA09707D1B5F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>point_of_sale.tests</RootNamespace>
-    <AssemblyName>point-of-sale.tests</AssemblyName>
+    <RootNamespace>PointOfSale.Tests</RootNamespace>
+    <AssemblyName>PointOfSale.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,16 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PointOfSaleTests.cs" />
+    <Compile Include="PointOfSaleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\point-of-sale\point-of-sale.csproj">
+    <ProjectReference Include="..\PointOfSale\PointOfSale.csproj">
       <Project>{69e4d118-73fd-4d4d-b3d8-54c057ce5784}</Project>
-      <Name>point-of-sale</Name>
+      <Name>PointOfSale</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
