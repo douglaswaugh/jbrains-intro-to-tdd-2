@@ -1,12 +1,7 @@
 ﻿namespace PointOfSale
 {
-    public class Screen
+    public interface Screen
     {
-        public string Printed { get; private set; }
-
-        public void Print(string message)
-        {
-            Printed = message;
-        }
+        void Print(string message);
     }
 }
