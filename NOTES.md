@@ -6,6 +6,11 @@
 Test List
 =========
 
+* Product is found
+* Product cannot be found
+* Product is found but there are none in stock
+* Barcode is not valid
+
 * Whatever string comes in, always output a hardcoded price
 * Make sure barcode is being looked up
 * Implement barcode -> price map
