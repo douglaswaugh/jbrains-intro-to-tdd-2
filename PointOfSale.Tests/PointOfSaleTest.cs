@@ -11,7 +11,7 @@ namespace PointOfSale.Tests
         {
             var screen = Substitute.For<Screen>();
 
-            var pointOfSale = new PointOfSale(screen);
+            var pointOfSale = new Till(screen);
 
             pointOfSale.OnBarcode("12341234");
 

@@ -1,10 +1,10 @@
 ﻿namespace PointOfSale
 {
-    public class PointOfSale
+    public class Till
     {
         private readonly Screen _screen;
 
-        public PointOfSale(Screen screen)
+        public Till(Screen screen)
         {
             _screen = screen;
         }
