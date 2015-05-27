@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PointOfSale;
 
 namespace point_of_sale.tests
 {
@@ -9,13 +9,13 @@ namespace point_of_sale.tests
         [Test]
         public void Should_display_price_when_product_is_found()
         {
-            string sendToScreen = String.Empty;
+            var screen = new Screen();
 
-            var pointOfSale = new PointOfSale.PointOfSale(sendToScreen);
+            var pointOfSale = new PointOfSale.PointOfSale(screen);
 
             pointOfSale.OnBarcode("12341234");
 
-            Assert.That(sendToScreen, Is.EqualTo("£9.95"));
+            Assert.That(screen.Printed, Is.EqualTo("£9.95"));
         }
     }
 }

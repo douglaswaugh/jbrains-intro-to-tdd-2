@@ -2,16 +2,16 @@
 {
     public class PointOfSale
     {
-        private string _screen;
+        private readonly Screen _screen;
 
-        public PointOfSale(string screen)
+        public PointOfSale(Screen screen)
         {
             _screen = screen;
         }
 
         public void OnBarcode(string barcode)
         {
-            _screen = "£9.95";
+            _screen.Print("£9.95");
         }
     }
 }
