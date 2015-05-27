@@ -9,6 +9,11 @@
             _screen = screen;
         }
 
+        public Till(Screen screen, Catalogue catalogue)
+        {
+            _screen = screen;
+        }
+
         public void OnBarcode(string barcode)
         {
             _screen.Print("£9.95");
