@@ -11,22 +11,11 @@ namespace point_of_sale.tests
         {
             string sendToScreen = String.Empty;
 
-            var pointOfSale = new PointOfSale(sendToScreen);
+            var pointOfSale = new PointOfSale.PointOfSale(sendToScreen);
 
             pointOfSale.OnBarcode("12341234");
 
             Assert.That(sendToScreen, Is.EqualTo("£9.95"));
-        }
-    }
-
-    public class PointOfSale
-    {
-        public PointOfSale(string screen)
-        {
-        }
-
-        public void OnBarcode(string barcode)
-        {
         }
     }
 }
