@@ -10,8 +10,11 @@ namespace PointOfSale.Tests
         public void Should_display_price_when_product_is_found()
         {
             var screen = Substitute.For<Screen>();
+            
+            var catalogue = Substitute.For<Catalogue>();
+            catalogue.GetProduct("12341234").Returns("£9.95");
 
-            var pointOfSale = new Till(screen);
+            var pointOfSale = new Till(screen, catalogue);
 
             pointOfSale.OnBarcode("12341234");
 

@@ -18,14 +18,9 @@
 
         public void OnBarcode(string barcode)
         {
-            string product = null;
-            if (_catalogue != null)
-             product = _catalogue.GetProduct(barcode);
+            var product = _catalogue.GetProduct(barcode);
 
-            if (product != null)
-                _screen.Print(product);
-
-            _screen.Print("£9.95");
+            _screen.Print(product);
         }
     }
 }
