@@ -15,7 +15,10 @@
         {
             var product = _catalogue.GetProduct(barcode);
 
-            _screen.Print(product);
+            if (product != null)
+                _screen.Print(product);
+
+            _screen.Print("Product not found");
         }
     }
 }

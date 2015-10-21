@@ -39,5 +39,13 @@ namespace PointOfSale.Tests
 
             _screen.Received().Print("£20.00");
         }
+
+        [Test]
+        public void Should_display_not_found_message_if_product_not_found()
+        {
+            _pointOfSale.OnBarcode("43214321");
+
+            _screen.Received().Print("Product not found");
+        }
     }
 }
