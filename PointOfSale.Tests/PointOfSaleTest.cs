@@ -57,5 +57,13 @@ namespace PointOfSale.Tests
 
             _screen.Received().Print("Barcode null");
         }
+
+        [Test]
+        public void Should_dispaly_empty_barcode_error()
+        {
+            _pointOfSale.OnBarcode(string.Empty);
+
+            _screen.Received().Print("Barcode empty");
+        }
     }
 }

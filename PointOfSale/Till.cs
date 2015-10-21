@@ -16,6 +16,9 @@
             if (barcode == null)
                 _screen.Print("Barcode null");
 
+            if (barcode == string.Empty)
+                _screen.Print("Barcode empty");
+
             var product = _catalogue.GetProduct(barcode);
 
             if (product != null)
