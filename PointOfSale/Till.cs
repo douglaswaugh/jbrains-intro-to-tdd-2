@@ -15,16 +15,17 @@
         {
             if (barcode == null)
                 _screen.Print("Barcode null");
-
-            if (barcode == string.Empty)
+            else if (barcode == string.Empty)
                 _screen.Print("Barcode empty");
+            else
+            {
+                var product = _catalogue.GetProduct(barcode);
 
-            var product = _catalogue.GetProduct(barcode);
-
-            if (product != null)
-                _screen.Print(product);
-
-            _screen.Print("Product not found");
+                if (product != null)
+                    _screen.Print(product);
+                else
+                    _screen.Print("Product not found");
+            }
         }
     }
 }

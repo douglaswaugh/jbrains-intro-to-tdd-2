@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System.Linq;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace PointOfSale.Tests
@@ -27,7 +28,8 @@ namespace PointOfSale.Tests
 
             _pointOfSale.OnBarcode("12341234");
 
-            _screen.Received().Print("£9.95");
+            _screen.Received(1).Print(Arg.Any<string>());
+            _screen.Received(1).Print("£9.95");
         }
 
         [Test]
@@ -37,6 +39,7 @@ namespace PointOfSale.Tests
 
             _pointOfSale.OnBarcode("56785678");
 
+            _screen.Received(1).Print(Arg.Any<string>());
             _screen.Received().Print("£20.00");
         }
 
@@ -46,7 +49,8 @@ namespace PointOfSale.Tests
             _catalogue.GetProduct(Arg.Any<string>()).Returns(p => null);
 
             _pointOfSale.OnBarcode("43214321");
-
+            
+            _screen.Received(1).Print(Arg.Any<string>());
             _screen.Received().Print("Product not found");
         }
 
@@ -54,7 +58,8 @@ namespace PointOfSale.Tests
         public void Should_display_null_barcode_error()
         {
             _pointOfSale.OnBarcode(null);
-
+            
+            _screen.Received(1).Print(Arg.Any<string>());
             _screen.Received().Print("Barcode null");
         }
 
@@ -63,6 +68,7 @@ namespace PointOfSale.Tests
         {
             _pointOfSale.OnBarcode(string.Empty);
 
+            _screen.Received(1).Print(Arg.Any<string>());
             _screen.Received().Print("Barcode empty");
         }
     }
