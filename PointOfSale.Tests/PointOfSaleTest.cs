@@ -23,7 +23,10 @@ namespace PointOfSale.Tests
         {
             var screen = Substitute.For<Screen>();
 
-            var pointOfSale = new Till(screen);
+            var catalogue = Substitute.For<Catalogue>();
+            catalogue.GetProduct("56785678").Returns("£20.00");
+
+            var pointOfSale = new Till(screen, catalogue);
 
             pointOfSale.OnBarcode("56785678");
 
