@@ -43,9 +43,19 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_display_not_found_message_if_product_not_found()
         {
+            _catalogue.GetProduct(Arg.Any<string>()).Returns(p => null);
+
             _pointOfSale.OnBarcode("43214321");
 
             _screen.Received().Print("Product not found");
+        }
+
+        [Test]
+        public void Should_display_null_barcode_error()
+        {
+            _pointOfSale.OnBarcode(null);
+
+            _screen.Received().Print("Barcode null");
         }
     }
 }

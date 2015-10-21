@@ -13,6 +13,9 @@
 
         public void OnBarcode(string barcode)
         {
+            if (barcode == null)
+                _screen.Print("Barcode null");
+
             var product = _catalogue.GetProduct(barcode);
 
             if (product != null)
