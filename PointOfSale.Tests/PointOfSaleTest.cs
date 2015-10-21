@@ -6,34 +6,38 @@ namespace PointOfSale.Tests
     [TestFixture]
     public class PointOfSaleTest
     {
+        private Screen _screen;
+        private Catalogue _catalogue;
+        private Till _pointOfSale;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _screen = Substitute.For<Screen>();
+
+            _catalogue = Substitute.For<Catalogue>();
+
+            _pointOfSale = new Till(_screen, _catalogue);
+        }
+
         [Test]
         public void Should_display_price_when_product_is_found()
         {
-            var screen = Substitute.For<Screen>();
-            
-            var catalogue = Substitute.For<Catalogue>();
-            catalogue.GetProduct("12341234").Returns("£9.95");
+            _catalogue.GetProduct("12341234").Returns("£9.95");
 
-            var pointOfSale = new Till(screen, catalogue);
+            _pointOfSale.OnBarcode("12341234");
 
-            pointOfSale.OnBarcode("12341234");
-
-            screen.Received().Print("£9.95");
+            _screen.Received().Print("£9.95");
         }
 
         [Test]
         public void Should_display_correct_price_for_different_products()
         {
-            var screen = Substitute.For<Screen>();
+            _catalogue.GetProduct("56785678").Returns("£20.00");
 
-            var catalogue = Substitute.For<Catalogue>();
-            catalogue.GetProduct("56785678").Returns("£20.00");
+            _pointOfSale.OnBarcode("56785678");
 
-            var pointOfSale = new Till(screen, catalogue);
-
-            pointOfSale.OnBarcode("56785678");
-
-            screen.Received().Print("£20.00");
+            _screen.Received().Print("£20.00");
         }
     }
 }

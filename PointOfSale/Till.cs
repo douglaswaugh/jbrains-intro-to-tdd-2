@@ -5,11 +5,6 @@
         private readonly Screen _screen;
         private readonly Catalogue _catalogue;
 
-        public Till(Screen screen)
-        {
-            _screen = screen;
-        }
-
         public Till(Screen screen, Catalogue catalogue)
         {
             _screen = screen;
