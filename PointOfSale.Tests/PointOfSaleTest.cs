@@ -43,7 +43,7 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_display_not_found_message_if_product_not_found()
         {
-            _pointOfSale.OnBarcode("43214321");
+            _pointOfSale.OnBarcode("99999999");
             
             _screen.Received(1).Print(Arg.Any<string>());
             _screen.Received().Print("Product not found");
@@ -52,6 +52,8 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_display_null_barcode_error()
         {
+            _pointOfSale = new Till(_screen, null);
+
             _pointOfSale.OnBarcode(null);
             
             _screen.Received(1).Print(Arg.Any<string>());
@@ -61,6 +63,8 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_dispaly_empty_barcode_error()
         {
+            _pointOfSale = new Till(_screen, null);
+
             _pointOfSale.OnBarcode(string.Empty);
 
             _screen.Received(1).Print(Arg.Any<string>());
