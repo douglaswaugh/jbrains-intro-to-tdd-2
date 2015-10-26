@@ -1,14 +1,14 @@
-﻿namespace PointOfSale
+﻿using System.Collections.Generic;
+
+namespace PointOfSale
 {
     public class Till
     {
         private readonly Screen _screen;
-        private readonly Catalogue _catalogue;
 
-        public Till(Screen screen, Catalogue catalogue)
+        public Till(Screen screen)
         {
             _screen = screen;
-            _catalogue = catalogue;
         }
 
         public void OnBarcode(string barcode)
@@ -19,10 +19,16 @@
                 _screen.Print("Barcode empty");
             else
             {
-                var product = _catalogue.GetProduct(barcode);
+                var products = new Dictionary<string, string>
+                {
+                    { "12341234", "£9.95" },
+                    { "56785678", "£20.00" }
+                };
 
-                if (product != null)
-                    _screen.Print(product);
+                if (products.ContainsKey(barcode))
+                {
+                    _screen.Print(products[barcode]);
+                }
                 else
                     _screen.Print("Product not found");
             }
