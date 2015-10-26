@@ -5,10 +5,12 @@ namespace PointOfSale
     public class Till
     {
         private readonly Screen _screen;
+        private readonly Dictionary<string, string> _products;
 
-        public Till(Screen screen)
+        public Till(Screen screen, Dictionary<string, string> pricesByBarcode)
         {
             _screen = screen;
+            _products = pricesByBarcode;
         }
 
         public void OnBarcode(string barcode)
@@ -19,15 +21,9 @@ namespace PointOfSale
                 _screen.Print("Barcode empty");
             else
             {
-                var products = new Dictionary<string, string>
+                if (_products.ContainsKey(barcode))
                 {
-                    { "12341234", "£9.95" },
-                    { "56785678", "£20.00" }
-                };
-
-                if (products.ContainsKey(barcode))
-                {
-                    _screen.Print(products[barcode]);
+                    _screen.Print(_products[barcode]);
                 }
                 else
                     _screen.Print("Product not found");

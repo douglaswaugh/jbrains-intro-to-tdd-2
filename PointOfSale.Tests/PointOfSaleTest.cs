@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace PointOfSale.Tests
@@ -14,7 +15,11 @@ namespace PointOfSale.Tests
         {
             _screen = Substitute.For<Screen>();
 
-            _pointOfSale = new Till(_screen);
+            _pointOfSale = new Till(_screen, new Dictionary<string, string>
+            {
+                { "12341234", "£9.95" },
+                { "56785678", "£20.00" }
+            });
         }
 
         [Test]
