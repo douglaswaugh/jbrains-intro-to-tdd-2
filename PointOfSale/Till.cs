@@ -16,18 +16,20 @@ namespace PointOfSale
         public void OnBarcode(string barcode)
         {
             if (barcode == null)
-                _screen.Print("Barcode null");
-            else if (barcode == string.Empty)
-                _screen.Print("Barcode empty");
-            else
             {
-                if (_products.ContainsKey(barcode))
-                {
-                    _screen.Print(_products[barcode]);
-                }
-                else
-                    _screen.Print("Product not found");
+                _screen.Print("Barcode null");
+                return;
             }
+            if (barcode == string.Empty)
+            {
+                _screen.Print("Barcode empty");
+                return;
+            }
+
+            if (_products.ContainsKey(barcode))
+                    _screen.Print(_products[barcode]);
+            else
+                _screen.Print("Product not found");
         }
     }
 }
