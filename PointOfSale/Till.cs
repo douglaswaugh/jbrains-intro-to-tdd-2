@@ -15,11 +15,6 @@ namespace PointOfSale
 
         public void OnBarcode(string barcode)
         {
-            if (barcode == null)
-            {
-                _screen.Print("Barcode null");
-                return;
-            }
             if (barcode == string.Empty)
             {
                 _screen.Print("Barcode empty");

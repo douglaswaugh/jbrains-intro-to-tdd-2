@@ -50,17 +50,6 @@ namespace PointOfSale.Tests
         }
 
         [Test]
-        public void Should_display_null_barcode_error()
-        {
-            _pointOfSale = new Till(_screen, null);
-
-            _pointOfSale.OnBarcode(null);
-            
-            _screen.Received(1).Print(Arg.Any<string>());
-            _screen.Received().Print("Barcode null");
-        }
-
-        [Test]
         public void Should_dispaly_empty_barcode_error()
         {
             _pointOfSale = new Till(_screen, null);
