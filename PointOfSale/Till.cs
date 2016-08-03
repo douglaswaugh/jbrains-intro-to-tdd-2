@@ -17,14 +17,29 @@ namespace PointOfSale
         {
             if (barcode == string.Empty)
             {
-                _screen.Print("Barcode empty");
+                DisplayEmptyBarcodeMessage();
                 return;
             }
 
             if (_products.ContainsKey(barcode))
-                    _screen.Print(_products[barcode]);
+                    DisplayPrice(barcode);
             else
-                _screen.Print(string.Format("Product not found for {0}", barcode));
+                DisplayProductNotFoundMessage(barcode);
+        }
+
+        private void DisplayPrice(string barcode)
+        {
+            _screen.Print(_products[barcode]);
+        }
+
+        private void DisplayProductNotFoundMessage(string barcode)
+        {
+            _screen.Print(string.Format("Product not found for {0}", barcode));
+        }
+
+        private void DisplayEmptyBarcodeMessage()
+        {
+            _screen.Print("Barcode empty");
         }
     }
 }
