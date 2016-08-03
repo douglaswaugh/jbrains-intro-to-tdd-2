@@ -23,7 +23,7 @@ namespace PointOfSale
 
         public void DisplayProductNotFoundMessage(string barcode)
         {
-            Print(String.Format("Product not found for {0}", barcode));
+            Print($"Product not found for {barcode}");
         }
 
         public void DisplayEmptyBarcodeMessage()
