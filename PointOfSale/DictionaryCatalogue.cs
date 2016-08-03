@@ -4,21 +4,21 @@ namespace PointOfSale
 {
     public class DictionaryCatalogue
     {
-        private readonly Dictionary<string, string> _pricesByBarcode;
+        private readonly Dictionary<string, string> _catalogue;
 
-        public DictionaryCatalogue(Dictionary<string, string> pricesByBarcode)
+        public DictionaryCatalogue(Dictionary<string, string> catalogue)
         {
-            _pricesByBarcode = pricesByBarcode;
+            _catalogue = catalogue;
         }
 
         public bool ProductsContains(string barcode)
         {
-            return _pricesByBarcode.ContainsKey(barcode);
+            return _catalogue.ContainsKey(barcode);
         }
 
         public string FindPriceForProduct(string barcode)
         {
-            return _pricesByBarcode[barcode];
+            return _catalogue[barcode];
         }
     }
 }
