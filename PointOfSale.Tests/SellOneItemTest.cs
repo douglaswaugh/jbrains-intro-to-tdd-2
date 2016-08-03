@@ -14,8 +14,8 @@ namespace PointOfSale.Tests
         public void SetUp()
         {
             _screen = Substitute.For<Screen>();
-
-            _pointOfSale = new Till(_screen, new Dictionary<string, string>
+            
+            _pointOfSale = new Till(new Display(_screen), new Dictionary<string, string>
             {
                 { "12341234", "£9.95" },
                 { "56785678", "£20.00" }
@@ -52,7 +52,7 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_dispaly_empty_barcode_error()
         {
-            _pointOfSale = new Till(_screen, null);
+            _pointOfSale = new Till(new Display(_screen), null);
 
             _pointOfSale.OnBarcode(string.Empty);
 

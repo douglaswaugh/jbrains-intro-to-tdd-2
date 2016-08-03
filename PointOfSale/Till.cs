@@ -4,12 +4,12 @@ namespace PointOfSale
 {
     public class Till
     {
-        private readonly Screen _screen;
+        private readonly Display _display;
         private readonly Dictionary<string, string> _products;
 
-        public Till(Screen screen, Dictionary<string, string> pricesByBarcode)
+        public Till(Display display, Dictionary<string, string> pricesByBarcode)
         {
-            _screen = screen;
+            _display = display;
             _products = pricesByBarcode;
         }
 
@@ -44,17 +44,17 @@ namespace PointOfSale
 
         private void DisplayPrice(string price)
         {
-            _screen.Print(price);
+            _display.Print(price);
         }
 
         private void DisplayProductNotFoundMessage(string barcode)
         {
-            _screen.Print(string.Format("Product not found for {0}", barcode));
+            _display.Print(string.Format("Product not found for {0}", barcode));
         }
 
         private void DisplayEmptyBarcodeMessage()
         {
-            _screen.Print("Barcode empty");
+            _display.Print("Barcode empty");
         }
     }
 }
