@@ -20,9 +20,14 @@
             }
 
             if (_catalogue.ProductsContains(barcode))
-                _display.DisplayPrice(_catalogue.FindPriceForProduct(barcode));
+            {
+                var price = _catalogue.FindPriceForProduct(barcode);
+                _display.DisplayPrice(price);
+            }
             else
+            {
                 _display.DisplayProductNotFoundMessage(barcode);
+            }
         }
 
         private static bool BarcodeIsEmpty(string barcode)
