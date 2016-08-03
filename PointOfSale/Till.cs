@@ -20,7 +20,7 @@
             }
 
             if (_dictionaryCatalouge.ProductsContains(barcode))
-                _display.DisplayPrice(FindPriceForProduct(barcode));
+                _display.DisplayPrice(_dictionaryCatalouge.FindPriceForProduct(barcode));
             else
                 _display.DisplayProductNotFoundMessage(barcode);
         }
@@ -28,11 +28,6 @@
         private static bool BarcodeIsEmpty(string barcode)
         {
             return barcode == string.Empty;
-        }
-
-        private string FindPriceForProduct(string barcode)
-        {
-            return _dictionaryCatalouge.PricesByBarcode[barcode];
         }
     }
 }
