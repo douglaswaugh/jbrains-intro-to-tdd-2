@@ -46,7 +46,7 @@ namespace PointOfSale.Tests
             _pointOfSale.OnBarcode("99999999");
             
             _screen.Received(1).Print(Arg.Any<string>());
-            _screen.Received().Print("Product not found");
+            _screen.Received().Print("Product not found for 99999999");
         }
 
         [Test]

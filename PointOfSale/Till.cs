@@ -29,7 +29,7 @@ namespace PointOfSale
             if (_products.ContainsKey(barcode))
                     _screen.Print(_products[barcode]);
             else
-                _screen.Print("Product not found");
+                _screen.Print(string.Format("Product not found for {0}", barcode));
         }
     }
 }
