@@ -22,7 +22,7 @@ namespace PointOfSale
             }
 
             if (ProductsContains(barcode))
-                DisplayPrice(FindPriceForProduct(barcode));
+                _display.DisplayPrice(FindPriceForProduct(barcode));
             else
                 DisplayProductNotFoundMessage(barcode);
         }
@@ -40,11 +40,6 @@ namespace PointOfSale
         private string FindPriceForProduct(string barcode)
         {
             return _products[barcode];
-        }
-
-        private void DisplayPrice(string price)
-        {
-            _display.Print(price);
         }
 
         private void DisplayProductNotFoundMessage(string barcode)

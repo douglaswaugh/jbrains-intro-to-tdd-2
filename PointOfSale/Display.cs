@@ -13,5 +13,10 @@
         {
             _screen.Print(message);
         }
+
+        public void DisplayPrice(string price)
+        {
+            Print(price);
+        }
     }
 }
