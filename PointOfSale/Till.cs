@@ -17,7 +17,7 @@ namespace PointOfSale
         {
             if (BarcodeIsEmpty(barcode))
             {
-                DisplayEmptyBarcodeMessage();
+                _display.DisplayEmptyBarcodeMessage();
                 return;
             }
 
@@ -40,11 +40,6 @@ namespace PointOfSale
         private string FindPriceForProduct(string barcode)
         {
             return _products[barcode];
-        }
-
-        private void DisplayEmptyBarcodeMessage()
-        {
-            _display.Print("Barcode empty");
         }
     }
 }
