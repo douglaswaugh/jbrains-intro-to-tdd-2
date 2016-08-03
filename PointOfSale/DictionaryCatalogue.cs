@@ -4,7 +4,7 @@ namespace PointOfSale
 {
     public class DictionaryCatalogue
     {
-        private Dictionary<string, string> _pricesByBarcode;
+        private readonly Dictionary<string, string> _pricesByBarcode;
 
         public DictionaryCatalogue(Dictionary<string, string> pricesByBarcode)
         {
