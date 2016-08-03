@@ -7,32 +7,37 @@ namespace PointOfSale.Tests
     [TestFixture]
     public class SellMultipleItemsTest
     {
+        private Screen _screen;
+        private Till _till;
+        private Dictionary<string, string> _pricesByBarcode;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _screen = Substitute.For<Screen>();
+            _pricesByBarcode = new Dictionary<string, string>();
+            _till = new Till(
+                new Display(_screen), 
+                new DictionaryCatalogue(_pricesByBarcode));
+        }
+
         [Test]
         public void Should_display_no_sale_message_when_no_products_have_been_scanned()
         {
-            var screen = Substitute.For<Screen>();
-            var till = new Till(new Display(screen), null);
+            _till.OnTotal();
 
-            till.OnTotal();
-
-            screen.Received().Print("No sale in progress. Try scanning a product.");
+            _screen.Received().Print("No sale in progress. Try scanning a product.");
         }
 
         [Test]
         public void Should_process_selling_one_found_item()
         {
-            var screen = Substitute.For<Screen>();
-            var pricesByBarcode = new Dictionary<string, string>
-            {
-                {"123245678", "£6.50"}
-            };
-            var catalogue = new DictionaryCatalogue(pricesByBarcode);
-            var till = new Till(new Display(screen), catalogue);
+            _pricesByBarcode.Add("123245678", "£6.50");
 
-            till.OnBarcode("123245678");
-            till.OnTotal();
+            _till.OnBarcode("123245678");
+            _till.OnTotal();
 
-            screen.Received().Print("Total: £6.50");
+            _screen.Received().Print("Total: £6.50");
         }
     }
 }
