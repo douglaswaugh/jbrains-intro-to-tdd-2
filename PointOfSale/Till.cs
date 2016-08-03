@@ -3,12 +3,12 @@
     public class Till
     {
         private readonly Display _display;
-        private readonly DictionaryCatalogue _dictionaryCatalouge;
+        private readonly DictionaryCatalogue _catalogue;
 
         public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
         {
             _display = display;
-            _dictionaryCatalouge = dictionaryCatalogue;
+            _catalogue = dictionaryCatalogue;
         }
 
         public void OnBarcode(string barcode)
@@ -19,8 +19,8 @@
                 return;
             }
 
-            if (_dictionaryCatalouge.ProductsContains(barcode))
-                _display.DisplayPrice(_dictionaryCatalouge.FindPriceForProduct(barcode));
+            if (_catalogue.ProductsContains(barcode))
+                _display.DisplayPrice(_catalogue.FindPriceForProduct(barcode));
             else
                 _display.DisplayProductNotFoundMessage(barcode);
         }
