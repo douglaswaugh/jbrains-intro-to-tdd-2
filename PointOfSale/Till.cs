@@ -24,7 +24,7 @@ namespace PointOfSale
             if (ProductsContains(barcode))
                 _display.DisplayPrice(FindPriceForProduct(barcode));
             else
-                DisplayProductNotFoundMessage(barcode);
+                _display.DisplayProductNotFoundMessage(barcode);
         }
 
         private static bool BarcodeIsEmpty(string barcode)
@@ -40,11 +40,6 @@ namespace PointOfSale
         private string FindPriceForProduct(string barcode)
         {
             return _products[barcode];
-        }
-
-        private void DisplayProductNotFoundMessage(string barcode)
-        {
-            _display.Print(string.Format("Product not found for {0}", barcode));
         }
 
         private void DisplayEmptyBarcodeMessage()

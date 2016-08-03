@@ -1,4 +1,6 @@
-﻿namespace PointOfSale
+﻿using System;
+
+namespace PointOfSale
 {
     public class Display
     {
@@ -17,6 +19,11 @@
         public void DisplayPrice(string price)
         {
             Print(price);
+        }
+
+        public void DisplayProductNotFoundMessage(string barcode)
+        {
+            Print(String.Format("Product not found for {0}", barcode));
         }
     }
 }
