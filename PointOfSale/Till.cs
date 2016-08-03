@@ -4,6 +4,7 @@
     {
         private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
+        private string _total;
 
         public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
         {
@@ -22,6 +23,7 @@
             if (_catalogue.ProductsContains(barcode))
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
+                _total = price;
                 _display.DisplayPrice(price);
             }
             else
@@ -32,7 +34,14 @@
 
         public void OnTotal()
         {
-            _display.DisplayNoSaleInProgressMessage();
+            if (_total == null)
+            {
+                _display.DisplayNoSaleInProgressMessage();
+            }
+            else
+            {
+                _display.DisplayTotal(_total);
+            }
         }
 
         private static bool BarcodeIsEmpty(string barcode)

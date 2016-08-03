@@ -30,5 +30,10 @@ namespace PointOfSale
         {
             _screen.Print("No sale in progress. Try scanning a product.");
         }
+
+        public void DisplayTotal(string total)
+        {
+            _screen.Print($"Total: {total}");
+        }
     }
 }
