@@ -11,19 +11,14 @@ namespace PointOfSale
             _pricesByBarcode = pricesByBarcode;
         }
 
-        public Dictionary<string, string> PricesByBarcode
-        {
-            get { return _pricesByBarcode; }
-        }
-
         public bool ProductsContains(string barcode)
         {
-            return PricesByBarcode.ContainsKey(barcode);
+            return _pricesByBarcode.ContainsKey(barcode);
         }
 
         public string FindPriceForProduct(string barcode)
         {
-            return PricesByBarcode[barcode];
+            return _pricesByBarcode[barcode];
         }
     }
 }
