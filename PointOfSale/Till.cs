@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace PointOfSale
+﻿namespace PointOfSale
 {
     public class Till
     {
         private readonly Display _display;
-        private readonly Dictionary<string, string> _products;
+        private readonly DictionaryCatalogue _dictionaryCatalouge;
 
-        public Till(Display display, Dictionary<string, string> pricesByBarcode)
+        public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
         {
             _display = display;
-            _products = pricesByBarcode;
+            _dictionaryCatalouge = dictionaryCatalogue;
         }
 
         public void OnBarcode(string barcode)
@@ -34,12 +32,12 @@ namespace PointOfSale
 
         private bool ProductsContains(string barcode)
         {
-            return _products.ContainsKey(barcode);
+            return _dictionaryCatalouge.PricesByBarcode.ContainsKey(barcode);
         }
 
         private string FindPriceForProduct(string barcode)
         {
-            return _products[barcode];
+            return _dictionaryCatalouge.PricesByBarcode[barcode];
         }
     }
 }
