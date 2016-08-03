@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace PointOfSale.Tests
 {
     [TestFixture]
-    public class SellOneItemTest
+    public class ScanOneItemTest
     {
         private Screen _screen;
         private Till _pointOfSale;
