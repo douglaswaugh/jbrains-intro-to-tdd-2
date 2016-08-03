@@ -15,7 +15,7 @@ namespace PointOfSale
 
         public void OnBarcode(string barcode)
         {
-            if (barcode == string.Empty)
+            if (BarcodeIsEmpty(barcode))
             {
                 DisplayEmptyBarcodeMessage();
                 return;
@@ -25,6 +25,11 @@ namespace PointOfSale
                 DisplayPrice(FindPriceForProduct(barcode));
             else
                 DisplayProductNotFoundMessage(barcode);
+        }
+
+        private static bool BarcodeIsEmpty(string barcode)
+        {
+            return barcode == string.Empty;
         }
 
         private bool ProductsContains(string barcode)
