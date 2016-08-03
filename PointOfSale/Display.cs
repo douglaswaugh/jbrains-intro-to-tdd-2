@@ -11,29 +11,24 @@ namespace PointOfSale
             _screen = screen;
         }
 
-        public void Print(string message)
-        {
-            _screen.Print(message);
-        }
-
         public void DisplayPrice(string price)
         {
-            Print(price);
+            _screen.Print(price);
         }
 
         public void DisplayProductNotFoundMessage(string barcode)
         {
-            Print($"Product not found for {barcode}");
+            _screen.Print($"Product not found for {barcode}");
         }
 
         public void DisplayEmptyBarcodeMessage()
         {
-            Print("Barcode empty");
+            _screen.Print("Barcode empty");
         }
 
         public void DisplayNoSaleInProgressMessage()
         {
-            Print("No sale in progress. Try scanning a product.");
+            _screen.Print("No sale in progress. Try scanning a product.");
         }
     }
 }
