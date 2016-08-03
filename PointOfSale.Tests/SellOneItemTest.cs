@@ -14,12 +14,16 @@ namespace PointOfSale.Tests
         public void SetUp()
         {
             _screen = Substitute.For<Screen>();
-            
-            _pointOfSale = new Till(new Display(_screen), new DictionaryCatalogue(new Dictionary<string, string>
+
+            var display = new Display(_screen);
+            var pricesByBarcode = new Dictionary<string, string>
             {
                 { "12341234", "£9.95" },
                 { "56785678", "£20.00" }
-            }));
+            };
+            var dictionaryCatalogue = new DictionaryCatalogue(pricesByBarcode);
+
+            _pointOfSale = new Till(display, dictionaryCatalogue);
         }
 
         [Test]
