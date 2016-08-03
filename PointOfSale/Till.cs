@@ -34,14 +34,11 @@
 
         public void OnTotal()
         {
-            if (_total == null)
-            {
-                _display.DisplayNoSaleInProgressMessage();
-            }
-            else
-            {
+            var saleInProgress = _total != null;
+            if (saleInProgress)
                 _display.DisplayTotal(_total);
-            }
+            else
+                _display.DisplayNoSaleInProgressMessage();
         }
 
         private static bool BarcodeIsEmpty(string barcode)
