@@ -21,10 +21,15 @@ namespace PointOfSale
                 return;
             }
 
-            if (_products.ContainsKey(barcode))
-                    DisplayPrice(FindPriceForProduct(barcode));
+            if (ProductsContains(barcode))
+                DisplayPrice(FindPriceForProduct(barcode));
             else
                 DisplayProductNotFoundMessage(barcode);
+        }
+
+        private bool ProductsContains(string barcode)
+        {
+            return _products.ContainsKey(barcode);
         }
 
         private string FindPriceForProduct(string barcode)
