@@ -15,5 +15,10 @@ namespace PointOfSale
         {
             get { return _pricesByBarcode; }
         }
+
+        public bool ProductsContains(string barcode)
+        {
+            return PricesByBarcode.ContainsKey(barcode);
+        }
     }
 }
