@@ -30,5 +30,10 @@ namespace PointOfSale
         {
             Print("Barcode empty");
         }
+
+        public void DisplayNoSaleInProgressMessage()
+        {
+            Print("No sale in progress. Try scanning a product.");
+        }
     }
 }

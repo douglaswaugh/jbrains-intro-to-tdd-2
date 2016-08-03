@@ -30,6 +30,11 @@
             }
         }
 
+        public void OnTotal()
+        {
+            _display.DisplayNoSaleInProgressMessage();
+        }
+
         private static bool BarcodeIsEmpty(string barcode)
         {
             return barcode == string.Empty;
