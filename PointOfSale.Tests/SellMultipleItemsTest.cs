@@ -9,13 +9,13 @@ namespace PointOfSale.Tests
     {
         private Screen _screen;
         private Till _till;
-        private Dictionary<string, string> _pricesByBarcode;
+        private Dictionary<string, decimal> _pricesByBarcode;
 
         [SetUp]
         public void SetUp()
         {
             _screen = Substitute.For<Screen>();
-            _pricesByBarcode = new Dictionary<string, string>();
+            _pricesByBarcode = new Dictionary<string, decimal>();
             _till = new Till(
                 new Display(_screen), 
                 new DictionaryCatalogue(_pricesByBarcode));
@@ -32,7 +32,7 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_process_selling_one_found_item()
         {
-            _pricesByBarcode.Add("123245678", "£6.50");
+            _pricesByBarcode.Add("123245678", 6.50m);
 
             _till.OnBarcode("123245678");
             _till.OnTotal();

@@ -16,10 +16,10 @@ namespace PointOfSale.Tests
             _screen = Substitute.For<Screen>();
 
             var display = new Display(_screen);
-            var pricesByBarcode = new Dictionary<string, string>
+            var pricesByBarcode = new Dictionary<string, decimal>
             {
-                { "12341234", "£9.95" },
-                { "56785678", "£20.00" }
+                { "12341234", 9.95m },
+                { "56785678", 20.00m }
             };
             var dictionaryCatalogue = new DictionaryCatalogue(pricesByBarcode);
 

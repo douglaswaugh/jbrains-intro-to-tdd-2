@@ -4,9 +4,9 @@ namespace PointOfSale
 {
     public class DictionaryCatalogue
     {
-        private readonly Dictionary<string, string> _catalogue;
+        private readonly Dictionary<string, decimal> _catalogue;
 
-        public DictionaryCatalogue(Dictionary<string, string> catalogue)
+        public DictionaryCatalogue(Dictionary<string, decimal> catalogue)
         {
             _catalogue = catalogue;
         }
@@ -16,7 +16,7 @@ namespace PointOfSale
             return _catalogue.ContainsKey(barcode);
         }
 
-        public string FindPriceForProduct(string barcode)
+        public decimal FindPriceForProduct(string barcode)
         {
             return _catalogue[barcode];
         }

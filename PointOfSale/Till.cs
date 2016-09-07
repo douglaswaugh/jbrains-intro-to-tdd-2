@@ -4,7 +4,7 @@
     {
         private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
-        private string _total;
+        private decimal _total;
 
         public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
         {
@@ -34,7 +34,7 @@
 
         public void OnTotal()
         {
-            var saleInProgress = _total != null;
+            var saleInProgress = _total != 0m;
             if (saleInProgress)
                 _display.DisplayTotal(_total);
             else

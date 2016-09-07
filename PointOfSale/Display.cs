@@ -11,9 +11,9 @@ namespace PointOfSale
             _screen = screen;
         }
 
-        public void DisplayPrice(string price)
+        public void DisplayPrice(decimal price)
         {
-            _screen.Print(price);
+            _screen.Print("£" + price);
         }
 
         public void DisplayProductNotFoundMessage(string barcode)
@@ -31,9 +31,9 @@ namespace PointOfSale
             _screen.Print("No sale in progress. Try scanning a product.");
         }
 
-        public void DisplayTotal(string total)
+        public void DisplayTotal(decimal total)
         {
-            _screen.Print($"Total: {total}");
+            _screen.Print($"Total: £{total}");
         }
     }
 }
