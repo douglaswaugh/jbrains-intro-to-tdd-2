@@ -23,7 +23,7 @@
             if (_catalogue.ProductsContains(barcode))
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
-                _total = price;
+                _total += price;
                 _display.DisplayPrice(price);
             }
             else
