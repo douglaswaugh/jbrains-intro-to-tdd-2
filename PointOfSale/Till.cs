@@ -7,7 +7,6 @@ namespace PointOfSale
     {
         private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
-        private decimal _total;
         private readonly List<KeyValuePair<string, decimal>> _scannedProducts;
 
         public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
@@ -29,7 +28,6 @@ namespace PointOfSale
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
                 _scannedProducts.Add(new KeyValuePair<string, decimal>(barcode, price));
-                _total += price;
                 _display.DisplayPrice(price);
             }
             else
@@ -40,7 +38,7 @@ namespace PointOfSale
 
         public void OnTotal()
         {
-            var saleInProgress = _total != 0m;
+            var saleInProgress = _scannedProducts.Any();
             if (saleInProgress)
                 _display.DisplayTotal(_scannedProducts.Sum(p => p.Value));
             else
