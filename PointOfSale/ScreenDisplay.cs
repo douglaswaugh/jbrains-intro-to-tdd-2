@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace PointOfSale
+﻿namespace PointOfSale
 {
-    public class ScreenDisplay
+    public class ScreenDisplay : Display
     {
         private readonly Screen _screen;
 

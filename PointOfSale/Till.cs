@@ -5,11 +5,11 @@ namespace PointOfSale
 {
     public class Till
     {
-        private readonly ScreenDisplay _display;
+        private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
         private readonly ShoppingBasket _shoppingBasket;
 
-        public Till(ScreenDisplay display, DictionaryCatalogue dictionaryCatalogue, ShoppingBasket shoppingBasket)
+        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ShoppingBasket shoppingBasket)
         {
             _display = display;
             _catalogue = dictionaryCatalogue;
