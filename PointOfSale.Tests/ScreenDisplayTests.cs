@@ -49,5 +49,16 @@ namespace PointOfSale.Tests
 
             screen.Received().Print("No sale in progress. Try scanning a product.");
         }
+
+        [Test]
+        public void Should_display_total_message_on_screen()
+        {
+            var screen = Substitute.For<Screen>();
+            var display = new ScreenDisplay(screen);
+
+            display.DisplayTotal(4.95m);
+
+            screen.Received().Print("Total: £4.95");
+        }
     }
 }
