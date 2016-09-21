@@ -7,13 +7,13 @@ namespace PointOfSale
     {
         private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
-        private readonly List<KeyValuePair<string, decimal>> _scannedProducts;
+        private readonly List<KeyValuePair<string, decimal>> _pendingPurchaseProducts;
 
         public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
         {
             _display = display;
             _catalogue = dictionaryCatalogue;
-            _scannedProducts = new List<KeyValuePair<string, decimal>>();
+            _pendingPurchaseProducts = new List<KeyValuePair<string, decimal>>();
         }
 
         public void OnBarcode(string barcode)
@@ -27,7 +27,7 @@ namespace PointOfSale
             if (_catalogue.ProductsContains(barcode))
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
-                _scannedProducts.Add(new KeyValuePair<string, decimal>(barcode, price));
+                _pendingPurchaseProducts.Add(new KeyValuePair<string, decimal>(barcode, price));
                 _display.DisplayPrice(price);
             }
             else
@@ -38,8 +38,8 @@ namespace PointOfSale
 
         public void OnTotal()
         {
-            if (_scannedProducts.Any())
-                _display.DisplayTotal(_scannedProducts.Sum(p => p.Value));
+            if (_pendingPurchaseProducts.Any())
+                _display.DisplayTotal(_pendingPurchaseProducts.Sum(p => p.Value));
             else
                 _display.DisplayNoSaleInProgressMessage();
         }
