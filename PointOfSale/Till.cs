@@ -9,11 +9,11 @@ namespace PointOfSale
         private readonly DictionaryCatalogue _catalogue;
         private readonly ShoppingBasket _shoppingBasket;
 
-        public Till(Display display, DictionaryCatalogue dictionaryCatalogue)
+        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ShoppingBasket shoppingBasket)
         {
             _display = display;
             _catalogue = dictionaryCatalogue;
-            _shoppingBasket = new ShoppingBasket();
+            _shoppingBasket = shoppingBasket;
         }
 
         public void OnBarcode(string barcode)

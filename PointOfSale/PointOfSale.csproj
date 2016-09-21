@@ -42,6 +42,7 @@
     <Compile Include="Catalogue.cs" />
     <Compile Include="DictionaryCatalogue.cs" />
     <Compile Include="Display.cs" />
+    <Compile Include="ListShoppingBasket.cs" />
     <Compile Include="ShoppingBasket.cs" />
     <Compile Include="Till.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,8 +19,8 @@ namespace PointOfSale.Tests
             var catalogue = new DictionaryCatalogue(_products);
             _till = new Till(
                 new Display(_screen),
-                catalogue
-                );
+                catalogue,
+                new ListShoppingBasket());
         }
 
         [Test]
@@ -29,6 +29,17 @@ namespace PointOfSale.Tests
             _till.OnTotal();
 
             _screen.Received().Print("No sale in progress. Try scanning a product.");
+        }
+
+        [Test]
+        public void Should_send_basket_total_to_display_on_total()
+        {
+            _products.Add("1", 6.50m);
+
+            _till.OnBarcode("1");
+            _till.OnTotal();
+
+            _screen.Received().Print("Total: £6.50");
         }
 
         [Test]

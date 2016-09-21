@@ -23,7 +23,7 @@ namespace PointOfSale.Tests
             };
             var dictionaryCatalogue = new DictionaryCatalogue(pricesByBarcode);
 
-            _pointOfSale = new Till(display, dictionaryCatalogue);
+            _pointOfSale = new Till(display, dictionaryCatalogue, new ListShoppingBasket());
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_dispaly_empty_barcode_error()
         {
-            _pointOfSale = new Till(new Display(_screen), new DictionaryCatalogue(null));
+            _pointOfSale = new Till(new Display(_screen), new DictionaryCatalogue(null), new ListShoppingBasket());
 
             _pointOfSale.OnBarcode(string.Empty);
 
