@@ -94,17 +94,9 @@ namespace PointOfSale.Tests
             screen.Received().Print("No sale in progress. Try scanning a product.");
         }
 
-        private Till CreateTill(Screen screen, DictionaryCatalogue catalogueWithItem)
-        {
-            return new Till(
-                new Display(screen),
-                catalogueWithItem
-            );
-        }
-
         private DictionaryCatalogue AnyCatalogue()
         {
-            return new DictionaryCatalogue(new Dictionary<string, decimal>());
+            return EmptyCatalogue();
         }
 
         private DictionaryCatalogue CatalogueWithItem(string barcode, decimal price)
@@ -124,10 +116,23 @@ namespace PointOfSale.Tests
 
         private DictionaryCatalogue CatalogueWithoutItem(string barcode)
         {
-            return new DictionaryCatalogue(new Dictionary<string, decimal>());
+            return EmptyCatalogue();
         }
 
         private DictionaryCatalogue CatalogueWithoutItems(params string[] products)
+        {
+            return EmptyCatalogue();
+        }
+
+        private Till CreateTill(Screen screen, DictionaryCatalogue catalogueWithItem)
+        {
+            return new Till(
+                new Display(screen),
+                catalogueWithItem
+            );
+        }
+
+        private static DictionaryCatalogue EmptyCatalogue()
         {
             return new DictionaryCatalogue(new Dictionary<string, decimal>());
         }
