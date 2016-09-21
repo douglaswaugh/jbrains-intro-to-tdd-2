@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 
 namespace PointOfSale.Tests
@@ -7,18 +6,18 @@ namespace PointOfSale.Tests
     [TestFixture]
     public class TillOnTotalTests
     {
-        private Screen _screen;
         private Till _till;
         private ShoppingBasket _shoppingBasket;
+        private Display _display;
 
         [SetUp]
         public void SetUp()
         {
-            _screen = Substitute.For<Screen>();
+            _display = Substitute.For<Display>();
             _shoppingBasket = Substitute.For<ShoppingBasket>();
             _till = new Till(
-                new ScreenDisplay(_screen),
-                new DictionaryCatalogue(new Dictionary<string, decimal>()),
+                _display,
+                null, // SMELL constructor parameter not needed in tests
                 _shoppingBasket);
         }
 
@@ -29,7 +28,7 @@ namespace PointOfSale.Tests
 
             _till.OnTotal();
 
-            _screen.Received().Print("No sale in progress. Try scanning a product.");
+            _display.Received().DisplayNoSaleInProgressMessage();
         }
 
         [Test]
@@ -40,7 +39,7 @@ namespace PointOfSale.Tests
 
             _till.OnTotal();
 
-            _screen.Received().Print("Total: £6.50");
+            _display.Received().DisplayTotal(6.50m);
         }
     }
 }
