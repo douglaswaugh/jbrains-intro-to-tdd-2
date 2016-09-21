@@ -15,7 +15,7 @@ namespace PointOfSale.Tests
         {
             _screen = Substitute.For<Screen>();
 
-            var display = new Display(_screen);
+            var display = new ScreenDisplay(_screen);
             var pricesByBarcode = new Dictionary<string, decimal>
             {
                 { "12341234", 9.95m },
@@ -56,7 +56,7 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_dispaly_empty_barcode_error()
         {
-            _pointOfSale = new Till(new Display(_screen), new DictionaryCatalogue(null), new ListShoppingBasket());
+            _pointOfSale = new Till(new ScreenDisplay(_screen), new DictionaryCatalogue(null), new ListShoppingBasket());
 
             _pointOfSale.OnBarcode(string.Empty);
 
@@ -69,7 +69,7 @@ namespace PointOfSale.Tests
         {
             var shoppingBasket = Substitute.For<ShoppingBasket>();
             var pointOfSale = new Till(
-                new Display(_screen), 
+                new ScreenDisplay(_screen), 
                 new DictionaryCatalogue(
                     new Dictionary<string, decimal>
                     {
@@ -88,7 +88,7 @@ namespace PointOfSale.Tests
         {
             var shoppingBasket = Substitute.For<ShoppingBasket>();
             var pointOfSale = new Till(
-                new Display(_screen),
+                new ScreenDisplay(_screen),
                 new DictionaryCatalogue(new Dictionary<string, decimal>()),
                 shoppingBasket
             );
@@ -103,7 +103,7 @@ namespace PointOfSale.Tests
         {
             var shoppingBasket = Substitute.For<ShoppingBasket>();
             var pointOfSale = new Till(
-                new Display(_screen),
+                new ScreenDisplay(_screen),
                 new DictionaryCatalogue(new Dictionary<string, decimal>()),
                 shoppingBasket
             );

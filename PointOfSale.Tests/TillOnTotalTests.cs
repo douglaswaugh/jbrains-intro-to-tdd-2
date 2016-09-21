@@ -17,7 +17,7 @@ namespace PointOfSale.Tests
             _screen = Substitute.For<Screen>();
             _shoppingBasket = Substitute.For<ShoppingBasket>();
             _till = new Till(
-                new Display(_screen),
+                new ScreenDisplay(_screen),
                 new DictionaryCatalogue(new Dictionary<string, decimal>()),
                 _shoppingBasket);
         }

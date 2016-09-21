@@ -2,11 +2,11 @@
 
 namespace PointOfSale
 {
-    public class Display
+    public class ScreenDisplay
     {
         private readonly Screen _screen;
 
-        public Display(Screen screen)
+        public ScreenDisplay(Screen screen)
         {
             _screen = screen;
         }
