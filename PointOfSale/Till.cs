@@ -38,8 +38,7 @@ namespace PointOfSale
 
         public void OnTotal()
         {
-            var saleInProgress = _scannedProducts.Any();
-            if (saleInProgress)
+            if (_scannedProducts.Any())
                 _display.DisplayTotal(_scannedProducts.Sum(p => p.Value));
             else
                 _display.DisplayNoSaleInProgressMessage();
