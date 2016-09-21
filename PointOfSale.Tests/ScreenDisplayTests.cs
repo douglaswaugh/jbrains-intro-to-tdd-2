@@ -38,5 +38,16 @@ namespace PointOfSale.Tests
 
             screen.Received().Print("Barcode empty");
         }
+
+        [Test]
+        public void Should_display_no_sale_in_progress_message_on_screen()
+        {
+            var screen = Substitute.For<Screen>();
+            var display = new ScreenDisplay(screen);
+
+            display.DisplayNoSaleInProgressMessage();
+
+            screen.Received().Print("No sale in progress. Try scanning a product.");
+        }
     }
 }
