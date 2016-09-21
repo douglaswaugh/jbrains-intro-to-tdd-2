@@ -49,7 +49,7 @@ namespace PointOfSale
             return _pendingPurchaseProducts.Sum(p => p.Value);
         }
 
-        private static bool BarcodeIsEmpty(string barcode)
+        private bool BarcodeIsEmpty(string barcode)
         {
             return barcode == string.Empty;
         }
