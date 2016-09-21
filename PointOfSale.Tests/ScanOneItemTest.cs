@@ -7,88 +7,84 @@ namespace PointOfSale.Tests
     [TestFixture]
     public class ScanOneItemTest
     {
-        private Screen _screen;
-        private Till _pointOfSale;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _screen = Substitute.For<Screen>();
-
-            var display = new ScreenDisplay(_screen);
-            var pricesByBarcode = new Dictionary<string, decimal>
-            {
-                { "12341234", 9.95m },
-                { "56785678", 20.00m }
-            };
-            var dictionaryCatalogue = new DictionaryCatalogue(pricesByBarcode);
-
-            _pointOfSale = new Till(display, dictionaryCatalogue, new ListShoppingBasket());
-        }
-
         [Test]
         public void Should_display_price_when_product_is_found()
         {
-            _pointOfSale.OnBarcode("12341234");
+            var display = Substitute.For<Display>();
+            var basket = Substitute.For<ShoppingBasket>();
+            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
+            {
+                { "12341234", 9.95m }
+            });
 
-            _screen.Received(1).Print(Arg.Any<string>());
-            _screen.Received(1).Print("£9.95");
+            var till = new Till(display, catalogue, basket);
+
+            till.OnBarcode("12341234");
+
+            display.Received().DisplayPrice(9.95m);
+            basket.Received().AddProduct(new KeyValuePair<string, decimal>("12341234", 9.95m));
         }
 
         [Test]
         public void Should_display_correct_price_for_different_products()
         {
-            _pointOfSale.OnBarcode("56785678");
+            var display = Substitute.For<Display>();
+            var basket = Substitute.For<ShoppingBasket>();
+            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
+            {
+                { "12341234", 9.95m },
+                { "56785678", 20.00m }
+            });
 
-            _screen.Received(1).Print(Arg.Any<string>());
-            _screen.Received().Print("£20.00");
+            var till = new Till(display, catalogue, basket);
+
+            till.OnBarcode("56785678");
+
+            display.Received().DisplayPrice(20.00m);
+            basket.Received().AddProduct(new KeyValuePair<string, decimal>("56785678", 20.00m));
         }
 
         [Test]
         public void Should_display_not_found_message_if_product_not_found()
         {
-            _pointOfSale.OnBarcode("99999999");
-            
-            _screen.Received(1).Print(Arg.Any<string>());
-            _screen.Received().Print("Product not found for 99999999");
+            var display = Substitute.For<Display>();
+            var basket = Substitute.For<ShoppingBasket>();
+            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
+            {
+                { "12341234", 9.95m }
+            });
+
+            var till = new Till(display, catalogue, basket);
+
+            till.OnBarcode("99999999");
+
+            display.Received().DisplayProductNotFoundMessage("99999999");
         }
 
         [Test]
         public void Should_dispaly_empty_barcode_error()
         {
-            _pointOfSale = new Till(new ScreenDisplay(_screen), new DictionaryCatalogue(null), new ListShoppingBasket());
+            var display = Substitute.For<Display>();
+            var basket = Substitute.For<ShoppingBasket>();
+            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
+            {
+                { "12341234", 9.95m }
+            });
 
-            _pointOfSale.OnBarcode(string.Empty);
+            var till = new Till(display, catalogue, basket);
 
-            _screen.Received(1).Print(Arg.Any<string>());
-            _screen.Received().Print("Barcode empty");
-        }
+            till.OnBarcode(string.Empty);
 
-        [Test]
-        public void Should_add_found_product_to_shopping_list()
-        {
-            var shoppingBasket = Substitute.For<ShoppingBasket>();
-            var pointOfSale = new Till(
-                new ScreenDisplay(_screen), 
-                new DictionaryCatalogue(
-                    new Dictionary<string, decimal>
-                    {
-                        { "1", 6.23m }
-                    }), 
-                shoppingBasket
-            );
-
-            pointOfSale.OnBarcode("1");
-
-            shoppingBasket.Received().AddProduct(new KeyValuePair<string, decimal>("1", 6.23m));
+            display.Received().DisplayEmptyBarcodeMessage();
         }
 
         [Test]
         public void Should_not_add_product_to_shopping_list_if_product_not_found()
         {
+            var display = Substitute.For<Display>();
             var shoppingBasket = Substitute.For<ShoppingBasket>();
             var pointOfSale = new Till(
-                new ScreenDisplay(_screen),
+                display,
                 new DictionaryCatalogue(new Dictionary<string, decimal>()),
                 shoppingBasket
             );
@@ -101,9 +97,10 @@ namespace PointOfSale.Tests
         [Test]
         public void Should_not_add_product_to_shopping_list_if_barcode_empty()
         {
+            var display = Substitute.For<Display>();
             var shoppingBasket = Substitute.For<ShoppingBasket>();
             var pointOfSale = new Till(
-                new ScreenDisplay(_screen),
+                display,
                 new DictionaryCatalogue(new Dictionary<string, decimal>()),
                 shoppingBasket
             );
