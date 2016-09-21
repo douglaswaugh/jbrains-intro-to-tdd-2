@@ -63,5 +63,54 @@ namespace PointOfSale.Tests
             _screen.Received(1).Print(Arg.Any<string>());
             _screen.Received().Print("Barcode empty");
         }
+
+        [Test]
+        public void Should_add_found_product_to_shopping_list()
+        {
+            var shoppingBasket = Substitute.For<ShoppingBasket>();
+            var pointOfSale = new Till(
+                new Display(_screen), 
+                new DictionaryCatalogue(
+                    new Dictionary<string, decimal>
+                    {
+                        { "1", 6.23m }
+                    }), 
+                shoppingBasket
+            );
+
+            pointOfSale.OnBarcode("1");
+
+            shoppingBasket.Received().AddProduct(new KeyValuePair<string, decimal>("1", 6.23m));
+        }
+
+        [Test]
+        public void Should_not_add_product_to_shopping_list_if_product_not_found()
+        {
+            var shoppingBasket = Substitute.For<ShoppingBasket>();
+            var pointOfSale = new Till(
+                new Display(_screen),
+                new DictionaryCatalogue(new Dictionary<string, decimal>()),
+                shoppingBasket
+            );
+
+            pointOfSale.OnBarcode("1");
+
+            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<KeyValuePair<string, decimal>>());
+        }
+
+        [Test]
+        public void Should_not_add_product_to_shopping_list_if_barcode_empty()
+        {
+            var shoppingBasket = Substitute.For<ShoppingBasket>();
+            var pointOfSale = new Till(
+                new Display(_screen),
+                new DictionaryCatalogue(new Dictionary<string, decimal>()),
+                shoppingBasket
+            );
+
+            pointOfSale.OnBarcode(string.Empty);
+
+            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<KeyValuePair<string, decimal>>());
+        }
     }
 }
