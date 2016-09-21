@@ -32,7 +32,7 @@ namespace PointOfSale.Tests
         }
 
         [Test]
-        public void Should_process_selling_one_found_item()
+        public void Should_process_selling_one_found_product()
         {
             _products.Add("1", 6.50m);
 
@@ -43,7 +43,7 @@ namespace PointOfSale.Tests
         }
 
         [Test]
-        public void Should_process_selling_one_not_found_item()
+        public void Should_process_selling_one_not_found_products()
         {
             _products.Remove("product you won't find");
 
@@ -54,7 +54,7 @@ namespace PointOfSale.Tests
         }
 
         [Test]
-        public void Should_process_selling_multiple_found_items()
+        public void Should_process_selling_multiple_found_products()
         {
             _products.Add("1", 8.50m);
             _products.Add("2", 12.75m);
@@ -69,7 +69,7 @@ namespace PointOfSale.Tests
         }
 
         [Test]
-        public void Should_process_selling_multiple_not_found_items()
+        public void Should_process_selling_multiple_not_found_products()
         {
             _products.Remove("product you won't find");
             _products.Remove("another product you won't find");
