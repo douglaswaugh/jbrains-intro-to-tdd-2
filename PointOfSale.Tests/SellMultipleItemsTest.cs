@@ -63,5 +63,16 @@ namespace PointOfSale.Tests
 
             _screen.Received().Print("Total: £24.55");
         }
+
+        [Test]
+        public void Should_process_selling_multiple_not_found_items()
+        {
+            _till.OnBarcode("product you won't find");
+            _till.OnBarcode("another product you won't find");
+            _till.OnBarcode("a thrid product you won't find");
+            _till.OnTotal();
+
+            _screen.Received().Print("No sale in progress. Try scanning a product.");
+        }
     }
 }
