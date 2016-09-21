@@ -39,9 +39,14 @@ namespace PointOfSale
         public void OnTotal()
         {
             if (_pendingPurchaseProducts.Any())
-                _display.DisplayTotal(_pendingPurchaseProducts.Sum(p => p.Value));
+                _display.DisplayTotal(PendingPurchaseProductsTotal());
             else
                 _display.DisplayNoSaleInProgressMessage();
+        }
+
+        private decimal PendingPurchaseProductsTotal()
+        {
+            return _pendingPurchaseProducts.Sum(p => p.Value);
         }
 
         private static bool BarcodeIsEmpty(string barcode)
