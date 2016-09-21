@@ -27,10 +27,10 @@ namespace PointOfSale.Tests
             var screen = Substitute.For<Screen>();
             var till = CreateTill(
                 screen, 
-                CatalogueWithItem("123245678", 6.50m)
+                CatalogueWithItem("1", 6.50m)
             );
 
-            till.OnBarcode("123245678");
+            till.OnBarcode("1");
             till.OnTotal();
 
             screen.Received().Print("Total: £6.50");
@@ -42,10 +42,10 @@ namespace PointOfSale.Tests
             var screen = Substitute.For<Screen>();
             var till = CreateTill(
                 screen,
-                CatalogueWithoutItem("123245678")
+                CatalogueWithoutItem("product you won't find")
             );
 
-            till.OnBarcode("123245678");
+            till.OnBarcode("product you won't find");
             till.OnTotal();
 
             screen.Received().Print("No sale in progress. Try scanning a product.");
@@ -59,15 +59,15 @@ namespace PointOfSale.Tests
                 screen, 
                 CatalogueWithItems(new Dictionary<string, decimal>
                 {
-                    {"12341234", 8.50m},
-                    {"43214321", 12.75m},
-                    {"12121212", 3.30m}
+                    {"1", 8.50m},
+                    {"2", 12.75m},
+                    {"3", 3.30m}
                 })
             );
 
-            till.OnBarcode("12341234");
-            till.OnBarcode("43214321");
-            till.OnBarcode("12121212");
+            till.OnBarcode("1");
+            till.OnBarcode("2");
+            till.OnBarcode("3");
             till.OnTotal();
 
             screen.Received().Print("Total: £24.55");
