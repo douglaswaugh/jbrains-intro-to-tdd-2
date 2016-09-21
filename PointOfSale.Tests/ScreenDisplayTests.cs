@@ -27,5 +27,16 @@ namespace PointOfSale.Tests
 
             screen.Received().Print("Product not found for not found product barcode");
         }
+
+        [Test]
+        public void Should_display_empty_barcode_message_on_screen()
+        {
+            var screen = Substitute.For<Screen>();
+            var display = new ScreenDisplay(screen);
+
+            display.DisplayEmptyBarcodeMessage();
+
+            screen.Received().Print("Barcode empty");
+        }
     }
 }
