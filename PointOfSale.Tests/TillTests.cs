@@ -13,7 +13,7 @@ namespace PointOfSale.Tests
         {
             var display = Substitute.For<Display>();
             var catalogue = DictionaryCatalogueWithProduct("1", 9.95m);
-            var shoppingBasket = new ShoppingBasket();
+            var shoppingBasket = ShoppingBasket();
 
             var till = new Till(display, catalogue, shoppingBasket);
 
@@ -31,8 +31,9 @@ namespace PointOfSale.Tests
                 { "1", 9.95m },
                 { "2", 20.00m }
             });
+            var shoppingBasket = ShoppingBasket();
 
-            var till = new Till(display, catalogue, new ShoppingBasket());
+            var till = new Till(display, catalogue, shoppingBasket);
 
             till.OnBarcode("2");
 
@@ -44,7 +45,7 @@ namespace PointOfSale.Tests
         {
             var display = Substitute.For<Display>();
             var catalogue = DictionaryCatalogueWithoutProduct("product not found barcode");
-            var shoppingBasket = new ShoppingBasket();
+            var shoppingBasket = ShoppingBasket();
 
             var till = new Till(display, catalogue, shoppingBasket);
 
@@ -58,7 +59,7 @@ namespace PointOfSale.Tests
         {
             var display = Substitute.For<Display>();
             var catalogue = DictionaryCatalogueWithProduct(string.Empty, 9.95m);
-            var shoppingBasket = new ShoppingBasket();
+            var shoppingBasket = ShoppingBasket();
 
             var till = new Till(display, catalogue, shoppingBasket);
 
@@ -72,7 +73,7 @@ namespace PointOfSale.Tests
         {
             var display = Substitute.For<Display>();
             var catalogue = AnyDictionaryCatalogue();
-            var shoppingBasket = new ShoppingBasket();
+            var shoppingBasket = ShoppingBasket();
 
             var till = new Till(display, catalogue, shoppingBasket);
 
@@ -86,7 +87,7 @@ namespace PointOfSale.Tests
         {
             var display = Substitute.For<Display>();
             var catalogue = DictionaryCatalogueWithProduct("1", 6.50m);
-            var shoppingBasket = new ShoppingBasket();
+            var shoppingBasket = ShoppingBasket();
 
             var till = new Till(display, catalogue, shoppingBasket);
 
@@ -94,6 +95,11 @@ namespace PointOfSale.Tests
             till.OnTotal();
 
             display.Received().DisplayTotal(6.50m);
+        }
+
+        private static ShoppingBasket ShoppingBasket()
+        {
+            return new ShoppingBasket();
         }
 
         private static Catalogue AnyDictionaryCatalogue()
