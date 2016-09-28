@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace PointOfSale.Tests
 {
     [TestFixture]
-    public class ScanOneItemTest
+    public class ScanOneItemTests
     {
         [Test]
         public void Should_display_price_when_product_is_found()
@@ -62,6 +62,22 @@ namespace PointOfSale.Tests
         }
 
         [Test]
+        public void Should_not_add_product_to_shopping_list_if_product_not_found()
+        {
+            var display = Substitute.For<Display>();
+            var shoppingBasket = Substitute.For<ShoppingBasket>();
+            var pointOfSale = new Till(
+                display,
+                new DictionaryCatalogue(new Dictionary<string, decimal>()),
+                shoppingBasket
+            );
+
+            pointOfSale.OnBarcode("1");
+
+            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<Product>());
+        }
+
+        [Test]
         public void Should_dispaly_empty_barcode_error()
         {
             var display = Substitute.For<Display>();
@@ -76,22 +92,6 @@ namespace PointOfSale.Tests
             till.OnBarcode(string.Empty);
 
             display.Received().DisplayEmptyBarcodeMessage();
-        }
-
-        [Test]
-        public void Should_not_add_product_to_shopping_list_if_product_not_found()
-        {
-            var display = Substitute.For<Display>();
-            var shoppingBasket = Substitute.For<ShoppingBasket>();
-            var pointOfSale = new Till(
-                display,
-                new DictionaryCatalogue(new Dictionary<string, decimal>()),
-                shoppingBasket
-            );
-
-            pointOfSale.OnBarcode("1");
-
-            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<Product>());
         }
 
         [Test]
