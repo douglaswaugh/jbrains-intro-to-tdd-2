@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PointOfSale
 {
-    public class ListShoppingBasket : ShoppingBasket
+    public class ListShoppingBasket
     {
         private readonly List<Product>_productProducts;
 
