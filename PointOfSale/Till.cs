@@ -25,6 +25,7 @@
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
                 _shoppingBasket.AddProduct(new Product(barcode, price));
+
                 _display.DisplayPrice(price);
             }
             else
