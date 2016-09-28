@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace PointOfSale
+﻿namespace PointOfSale
 {
     public interface ShoppingBasket
     {
         bool Empty { get; }
         decimal Total { get; }
-        void AddProduct(KeyValuePair<string, decimal> product);
+        void AddProduct(Product product);
     }
 }

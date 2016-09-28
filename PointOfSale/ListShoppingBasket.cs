@@ -5,20 +5,20 @@ namespace PointOfSale
 {
     public class ListShoppingBasket : ShoppingBasket
     {
-        private readonly List<KeyValuePair<string, decimal>> _products;
+        private readonly List<Product>_productProducts;
 
         public ListShoppingBasket()
         {
-            _products = new List<KeyValuePair<string, decimal>>();
+            _productProducts = new List<Product>();
         }
 
-        public bool Empty => !_products.Any();
+        public bool Empty => !_productProducts.Any();
 
-        public decimal Total => _products.Sum(p => p.Value);
+        public decimal Total => _productProducts.Sum(p => p.Price);
 
-        public void AddProduct(KeyValuePair<string, decimal> product)
+        public void AddProduct(Product product)
         {
-            _products.Add(product);
+            _productProducts.Add(product);
         }
     }
 }

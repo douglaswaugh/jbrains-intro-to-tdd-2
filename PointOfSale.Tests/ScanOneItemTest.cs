@@ -22,7 +22,7 @@ namespace PointOfSale.Tests
             till.OnBarcode("12341234");
 
             display.Received().DisplayPrice(9.95m);
-            basket.Received().AddProduct(new KeyValuePair<string, decimal>("12341234", 9.95m));
+            basket.Received().AddProduct(NewProduct("12341234", 9.95m));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace PointOfSale.Tests
             till.OnBarcode("56785678");
 
             display.Received().DisplayPrice(20.00m);
-            basket.Received().AddProduct(new KeyValuePair<string, decimal>("56785678", 20.00m));
+            basket.Received().AddProduct(NewProduct("56785678", 20.00m));
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace PointOfSale.Tests
 
             pointOfSale.OnBarcode("1");
 
-            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<KeyValuePair<string, decimal>>());
+            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<Product>());
         }
 
         [Test]
@@ -107,7 +107,12 @@ namespace PointOfSale.Tests
 
             pointOfSale.OnBarcode(string.Empty);
 
-            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<KeyValuePair<string, decimal>>());
+            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<Product>());
+        }
+
+        private static Product NewProduct(string barcode, decimal price)
+        {
+            return new Product(barcode, price);
         }
     }
 }

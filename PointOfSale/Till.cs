@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace PointOfSale
+﻿namespace PointOfSale
 {
     public class Till
     {
@@ -27,7 +24,7 @@ namespace PointOfSale
             if (_catalogue.ProductsContains(barcode))
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
-                _shoppingBasket.AddProduct(new KeyValuePair<string, decimal>(barcode, price));
+                _shoppingBasket.AddProduct(new Product(barcode, price));
                 _display.DisplayPrice(price);
             }
             else
