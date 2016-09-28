@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace PointOfSale.Tests
 {
     [TestFixture]
-    public class ListShoppingBasketTest
+    public class ShoppingBasketTest
     {
         [Test]
         public void Should_calculate_total_for_zero_products()
@@ -54,9 +54,9 @@ namespace PointOfSale.Tests
             Assert.That(basket.Empty, Is.False);
         }
 
-        private static ListShoppingBasket EmptyListShoppingBasket()
+        private static ShoppingBasket EmptyListShoppingBasket()
         {
-            return new ListShoppingBasket();
+            return new ShoppingBasket();
         }
 
         private Product AnyProduct()

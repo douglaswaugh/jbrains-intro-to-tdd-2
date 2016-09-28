@@ -4,9 +4,9 @@
     {
         private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
-        private readonly ListShoppingBasket _concreteShoppingBasket;
+        private readonly ShoppingBasket _concreteShoppingBasket;
 
-        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ListShoppingBasket concreteShoppingBasket)
+        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ShoppingBasket concreteShoppingBasket)
         {
             _display = display;
             _catalogue = dictionaryCatalogue;
