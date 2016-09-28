@@ -47,8 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ScreenDisplayTests.cs" />
-    <Compile Include="TillOnTotalTests.cs" />
-    <Compile Include="ScanOneItemTest.cs" />
+    <Compile Include="ScanOneItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ListShoppingBasketTest.cs" />
   </ItemGroup>

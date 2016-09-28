@@ -4,13 +4,13 @@
     {
         private readonly Display _display;
         private readonly DictionaryCatalogue _catalogue;
-        private readonly ShoppingBasket _shoppingBasket;
+        private readonly ListShoppingBasket _concreteShoppingBasket;
 
-        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ShoppingBasket shoppingBasket)
+        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ListShoppingBasket concreteShoppingBasket)
         {
             _display = display;
             _catalogue = dictionaryCatalogue;
-            _shoppingBasket = shoppingBasket;
+            _concreteShoppingBasket = concreteShoppingBasket;
         }
 
         public void OnBarcode(string barcode)
@@ -24,7 +24,7 @@
             if (_catalogue.ProductsContains(barcode))
             {
                 var price = _catalogue.FindPriceForProduct(barcode);
-                _shoppingBasket.AddProduct(new Product(barcode, price));
+                _concreteShoppingBasket.AddProduct(new Product(barcode, price));
 
                 _display.DisplayPrice(price);
             }
@@ -36,10 +36,10 @@
 
         public void OnTotal()
         {
-            if (_shoppingBasket.Empty)
+            if (_concreteShoppingBasket.Empty)
                 _display.DisplayNoSaleInProgressMessage();
             else
-                _display.DisplayTotal(_shoppingBasket.Total);
+                _display.DisplayTotal(_concreteShoppingBasket.Total);
         }
 
         private bool BarcodeIsEmpty(string barcode)

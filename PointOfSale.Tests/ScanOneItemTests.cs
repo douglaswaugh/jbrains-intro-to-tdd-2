@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,83 +12,55 @@ namespace PointOfSale.Tests
         public void Should_display_price_when_product_is_found()
         {
             var display = Substitute.For<Display>();
-            var basket = Substitute.For<ShoppingBasket>();
-            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
-            {
-                { "12341234", 9.95m }
-            });
+            var catalogue = DictionaryCatalogueWithProduct("1", 9.95m);
+            var shoppingBasket = new ListShoppingBasket();
 
-            var till = new Till(display, catalogue, basket);
+            var till = new Till(display, catalogue, shoppingBasket);
 
-            till.OnBarcode("12341234");
+            till.OnBarcode("1");
 
             display.Received().DisplayPrice(9.95m);
-            basket.Received().AddProduct(NewProduct("12341234", 9.95m));
         }
 
         [Test]
         public void Should_display_correct_price_for_different_products()
         {
             var display = Substitute.For<Display>();
-            var basket = Substitute.For<ShoppingBasket>();
-            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
+            var catalogue = DictionaryCatalogue(new Dictionary<string, decimal>
             {
-                { "12341234", 9.95m },
-                { "56785678", 20.00m }
+                { "1", 9.95m },
+                { "2", 20.00m }
             });
 
-            var till = new Till(display, catalogue, basket);
+            var till = new Till(display, catalogue, new ListShoppingBasket());
 
-            till.OnBarcode("56785678");
+            till.OnBarcode("2");
 
             display.Received().DisplayPrice(20.00m);
-            basket.Received().AddProduct(NewProduct("56785678", 20.00m));
         }
 
         [Test]
         public void Should_display_not_found_message_if_product_not_found()
         {
             var display = Substitute.For<Display>();
-            var basket = Substitute.For<ShoppingBasket>();
-            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
-            {
-                { "12341234", 9.95m }
-            });
+            var catalogue = DictionaryCatalogueWithoutProduct("product not found barcode");
+            var shoppingBasket = new ListShoppingBasket();
 
-            var till = new Till(display, catalogue, basket);
+            var till = new Till(display, catalogue, shoppingBasket);
 
-            till.OnBarcode("99999999");
+            till.OnBarcode("product not found barcode");
 
-            display.Received().DisplayProductNotFoundMessage("99999999");
-        }
-
-        [Test]
-        public void Should_not_add_product_to_shopping_list_if_product_not_found()
-        {
-            var display = Substitute.For<Display>();
-            var shoppingBasket = Substitute.For<ShoppingBasket>();
-            var pointOfSale = new Till(
-                display,
-                new DictionaryCatalogue(new Dictionary<string, decimal>()),
-                shoppingBasket
-            );
-
-            pointOfSale.OnBarcode("1");
-
-            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<Product>());
+            display.Received().DisplayProductNotFoundMessage("product not found barcode");
         }
 
         [Test]
         public void Should_dispaly_empty_barcode_error()
         {
             var display = Substitute.For<Display>();
-            var basket = Substitute.For<ShoppingBasket>();
-            var catalogue = new DictionaryCatalogue(new Dictionary<string, decimal>
-            {
-                { "12341234", 9.95m }
-            });
+            var catalogue = DictionaryCatalogueWithProduct(string.Empty, 9.95m);
+            var shoppingBasket = new ListShoppingBasket();
 
-            var till = new Till(display, catalogue, basket);
+            var till = new Till(display, catalogue, shoppingBasket);
 
             till.OnBarcode(string.Empty);
 
@@ -95,24 +68,59 @@ namespace PointOfSale.Tests
         }
 
         [Test]
-        public void Should_not_add_product_to_shopping_list_if_barcode_empty()
+        public void Should_display_no_sale_message_when_no_products_have_been_scanned()
         {
             var display = Substitute.For<Display>();
-            var shoppingBasket = Substitute.For<ShoppingBasket>();
-            var pointOfSale = new Till(
-                display,
-                new DictionaryCatalogue(new Dictionary<string, decimal>()),
-                shoppingBasket
-            );
+            var catalogue = AnyDictionaryCatalogue();
+            var shoppingBasket = new ListShoppingBasket();
 
-            pointOfSale.OnBarcode(string.Empty);
+            var till = new Till(display, catalogue, shoppingBasket);
 
-            shoppingBasket.DidNotReceive().AddProduct(Arg.Any<Product>());
+            till.OnTotal();
+
+            display.Received().DisplayNoSaleInProgressMessage();
         }
 
-        private static Product NewProduct(string barcode, decimal price)
+        [Test]
+        public void Should_send_basket_total_to_display_on_total()
         {
-            return new Product(barcode, price);
+            var display = Substitute.For<Display>();
+            var catalogue = DictionaryCatalogueWithProduct("1", 6.50m);
+            var shoppingBasket = new ListShoppingBasket();
+
+            var till = new Till(display, catalogue, shoppingBasket);
+
+            till.OnBarcode("1");
+            till.OnTotal();
+
+            display.Received().DisplayTotal(6.50m);
+        }
+
+        private static DictionaryCatalogue AnyDictionaryCatalogue()
+        {
+            return EmptyDictionaryCatalogue();
+        }
+
+        private static DictionaryCatalogue DictionaryCatalogueWithProduct(string barcode, decimal price)
+        {
+            return DictionaryCatalogue(new Dictionary<string, decimal> { { barcode, price } });
+        }
+
+        private static DictionaryCatalogue DictionaryCatalogueWithoutProduct(string barcode)
+        {
+            var dictionary = new Dictionary<string, decimal>();
+            dictionary.Remove(barcode);
+            return DictionaryCatalogue(dictionary);
+        }
+
+        private static DictionaryCatalogue EmptyDictionaryCatalogue()
+        {
+            return DictionaryCatalogue(new Dictionary<string, decimal>());
+        }
+
+        private static DictionaryCatalogue DictionaryCatalogue(Dictionary<string, decimal> dictionary)
+        {
+            return new DictionaryCatalogue(dictionary);
         }
     }
 }
