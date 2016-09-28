@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace PointOfSale.Tests
 {
     [TestFixture]
-    public class ScanOneItemTests
+    public class TillTests
     {
         [Test]
         public void Should_display_price_when_product_is_found()
