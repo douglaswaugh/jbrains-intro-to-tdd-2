@@ -3,13 +3,13 @@
     public class Till
     {
         private readonly Display _display;
-        private readonly DictionaryCatalogue _catalogue;
+        private readonly Catalogue _catalogue;
         private readonly ShoppingBasket _concreteShoppingBasket;
 
-        public Till(Display display, DictionaryCatalogue dictionaryCatalogue, ShoppingBasket concreteShoppingBasket)
+        public Till(Display display, Catalogue catalogue, ShoppingBasket concreteShoppingBasket)
         {
             _display = display;
-            _catalogue = dictionaryCatalogue;
+            _catalogue = catalogue;
             _concreteShoppingBasket = concreteShoppingBasket;
         }
 

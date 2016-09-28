@@ -96,31 +96,31 @@ namespace PointOfSale.Tests
             display.Received().DisplayTotal(6.50m);
         }
 
-        private static DictionaryCatalogue AnyDictionaryCatalogue()
+        private static Catalogue AnyDictionaryCatalogue()
         {
             return EmptyDictionaryCatalogue();
         }
 
-        private static DictionaryCatalogue DictionaryCatalogueWithProduct(string barcode, decimal price)
+        private static Catalogue DictionaryCatalogueWithProduct(string barcode, decimal price)
         {
             return DictionaryCatalogue(new Dictionary<string, decimal> { { barcode, price } });
         }
 
-        private static DictionaryCatalogue DictionaryCatalogueWithoutProduct(string barcode)
+        private static Catalogue DictionaryCatalogueWithoutProduct(string barcode)
         {
             var dictionary = new Dictionary<string, decimal>();
             dictionary.Remove(barcode);
             return DictionaryCatalogue(dictionary);
         }
 
-        private static DictionaryCatalogue EmptyDictionaryCatalogue()
+        private static Catalogue EmptyDictionaryCatalogue()
         {
             return DictionaryCatalogue(new Dictionary<string, decimal>());
         }
 
-        private static DictionaryCatalogue DictionaryCatalogue(Dictionary<string, decimal> dictionary)
+        private static Catalogue DictionaryCatalogue(Dictionary<string, decimal> dictionary)
         {
-            return new DictionaryCatalogue(dictionary);
+            return new Catalogue(dictionary);
         }
     }
 }

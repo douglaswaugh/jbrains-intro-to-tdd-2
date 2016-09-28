@@ -2,11 +2,11 @@
 
 namespace PointOfSale
 {
-    public class DictionaryCatalogue
+    public class Catalogue
     {
         private readonly Dictionary<string, decimal> _catalogue;
 
-        public DictionaryCatalogue(Dictionary<string, decimal> catalogue)
+        public Catalogue(Dictionary<string, decimal> catalogue)
         {
             _catalogue = catalogue;
         }
